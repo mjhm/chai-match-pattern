@@ -1,6 +1,8 @@
 # chai-match-pattern
 
-This is a general purpose JSON pattern matcher. It leverages the `lodash-match-pattern` module -- which is a `lodash` extension built on the `lodash-checkit` module -- which itself is a mashup of checking utilities from the popular `lodash` and `checkit` modules.  The primary goal of the modules is to enable the highly flexible, expressive, and resilient feature testing of JSON based APIs.
+This is a general purpose JSON pattern matcher. It leverages the `lodash-match-pattern` module -- which is a `lodash` extension built on the `lodash-checkit` module -- which itself is a mashup of checking utilities from the popular `lodash` and `checkit` modules.
+
+The primary goal of this and the supporting modules is to enable the highly flexible, expressive, and resilient feature testing of JSON based APIs.
 
 Here are the main features. You probably won't need all of them, but there's enough flexibility the building blocks will allow you to address the details of your specific us cases. All of the examples below are illustrated in the `/examples/example1/features/` as cucumber-js tests.
 
@@ -18,7 +20,7 @@ Here are the main features. You probably won't need all of them, but there's eno
 
 ## Deep JSON matching
 
-Suppose we have the "joeUser" object below and clone it for the pattern to match: `joeUserClone = _.cloneDeep(joeUser)`. Then `expect(joeUser).to.matchPattern(joeUserClone)` will succeed as expected.
+Just for starters, suppose we have the "joeUser" object below and clone it for the pattern to match: `joeUserClone = _.cloneDeep(joeUser)`. Then `expect(joeUser).to.matchPattern(joeUserClone)` will do a deep match of the objects and succeed as expected.
 ```
     {
       "id": 43,
@@ -43,11 +45,11 @@ Suppose we have the "joeUser" object below and clone it for the pattern to match
       ]
     }
 ```
-Deep matching of exact JSON patterns creates over specified and brittle feature tests. In practice such deep matches are only useful in small isolated feature tests and some unit tests. Just for example matching the `createDate` of the above user from a database might require some complex mocking of the database to spoof it into a testable exact value. We don't really care about exact date. All we care about is that the date behaves like a date. To this end the `chai-match-pattern` enables a rich and extensible type checking facilities.
+Unfortunately, deep matching of exact JSON patterns creates over specified and brittle feature tests. In practice such deep matches are only useful in small isolated feature tests and some unit tests. Just for example, trying to match the exact `createDate` of the above user from a database might require some complex mocking of the database to spoof a testable exact value. But this good news is we don't really care about the exact date -- all we really care about is that the date behaves like a date. To this end the `chai-match-pattern` enables a rich and extensible type checking facilities.
 
 ## Matching property types
 
-The pattern below may look a little odd at first, but main idea is that every there a bucket full of `_.isXxxx` matchers available from the `lodash` and `checkit` modules along with a few extras.
+The pattern below may look a little odd at first, but main idea is that there a bucket full of `_.isXxxx` matchers available to check the property types.
 ```
     {
       "id": "_.isInteger",
@@ -66,6 +68,7 @@ The pattern below may look a little odd at first, but main idea is that every th
     }
 ```
 The available matching functions are
+
 1. All `isXxxx` functions from `lodash`.
 1. All validation functions from `checkit` with `is` prepended.
 1. Case convention matchers constructed from lodash's `...Case` functions.
