@@ -30,7 +30,7 @@ Here are the main features. You probably won't need all of them, but there's ple
 1. [Partial objects](#partial-objects)
 1. [Partial and superset matches of arrays](#partial-and-superset-matches-of-arrays)
 1. [Omitted items](#omitted-items)
-1. [Parameterized matchers](#parameterized-matchers)
+1. [Parametrized matchers](#parametrized-matchers)
 1. [Unsorted arrays](#unsorted-arrays)
 1. [Transforms](#transforms)
 1. [Multiple matchers](#multiple-matchers)
@@ -64,7 +64,7 @@ Just for starters, suppose we have a "joeUser" object and want to validate its e
       ]
     });
 ```
-Unfortunately, deep matching of exact JSON patterns creates over-specified and brittle feature tests. In practice such deep matches are only useful in small isolated feature tests and occasional unit tests. Just for example, trying to match the exact `createDate` of the above user from a database might require some complex mocking of the database to spoof a testable exact value. But the good news is we don't really care about the exact date, we can trust that the database generated it correctly. All we really care about is that the date looks like a date. To this end the `chai-match-pattern` enables a rich and extensible facility for data type checking.
+Unfortunately, deep matching of exact JSON patterns creates over-specified and brittle feature tests. In practice such deep matches are only useful in small isolated feature tests and occasional unit tests. Just for example, trying to match the exact `createDate` of the above user from a database might require some complex mocking of the database to spoof a testable exact value. But the good news is that we don't really care about the exact date, and we can trust that the database generated it correctly. All we really care about is that the date looks like a date. To solve this and other over-specification problems `chai-match-pattern` enables a rich and extensible facility for data type checking.
 
 ## Matching property types
 
@@ -105,7 +105,7 @@ console.log(
 
 ## Partial objects
 
-Most of the time feature tests are interested in how objects change, and we don't need be concerned with properties of an object that aren't involved in the change.  Matching partial objects can create a huge simplification which focuses on the subject of the test. For example if we only wanted to test changing our user's email to say "billybob@duckduck.go" then we can simply match the pattern:
+Most of the time feature tests are interested in how objects change, and we don't need be concerned with properties of an object that aren't involved in the change.  Matching only partial objects can create a huge simplification which focuses on the subject of the test. For example if we only wanted to test changing our user's email to say "billybob@duckduck.go" then we can simply match the pattern:
 ```
     expect(joeUser).to.matchPattern({
       "id": "_.isInteger",
@@ -113,7 +113,7 @@ Most of the time feature tests are interested in how objects change, and we don'
       "...": ""
     });
 ```
-The `"..."` object key indicates that only specified keys are to be matched.
+The `"..."` object key indicates that only specified keys are matched, and all others in `joeUser` are ignored.
 
 _Note: from here on all the examples will use partial matching, and all will successfully match "joeUser"._
 
@@ -134,7 +134,7 @@ Similarly partial arrays can be matched with a couple caveats:
       "...": ""
     }
 ```
-Note that the above specifies both a partial array and a partial object.
+Note that the above specifies both a partial array (for `joeUser.tvshows`) and a partial object (for `joeUser`).
 
 Supersets are similarly specified by "---".
 ```
@@ -149,7 +149,7 @@ Supersets are similarly specified by "---".
       "...": ""
     }
 ```
-If you need to match `"..."` or `"---"` in an array see the [customization](#customization) section below.
+If you actually need to match `"..."` or `"---"` in an array see the [customization](#customization) section below.
 
 ## Omitted items
 
@@ -162,7 +162,7 @@ Sometimes an important API requirement specifies fields that should not be prese
     }
 ```
 
-## Parameterized matchers
+## Parametrized matchers
 
 Some of the matching functions take one or two parameters. These can be specified with ":" separators at the end of the matching function.
 ```
@@ -244,7 +244,7 @@ Here `_.filter(..., 'active')` is first applied to the test `friends` list, resu
 
 ## Multiple matchers
 
-Occasionally it may be most convenient to apply multiple matching assertions in the same pattern. This can be accomplished with the `_.arrayOfDups` transform.
+Occasionally it may be convenient to apply multiple matching assertions in the same pattern. This can be accomplished with the `_.arrayOfDups` transform.
 ```
     {
       "tvshows": {
@@ -260,7 +260,7 @@ In this example `_.arrayOfDups:2` creates two copies of the "tvshows" array. The
 
 ## Customization
 
-In many cases application of transforms will create unintuitive and hard to understand pattern specifications. Fortunately creating custom matchers and custom transforms is easily accomplished via lodash mixins. For our examples we've added two lodash mixins:
+In many cases application of transforms will create unintuitive and hard to understand pattern specifications. Fortunately creating custom matchers and custom transforms is easily accomplished via lodash mixins. For our examples we've added two lodash mixins to our example code:
 ```
 var _ = require('lodash-checkit');
 _.mixin({
