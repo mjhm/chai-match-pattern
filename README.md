@@ -136,7 +136,7 @@ Similarly partial arrays can be matched with a couple caveats:
 ```
 Note that the above specifies both a partial array (for `joeUser.tvshows`) and a partial object (for `joeUser`).
 
-Supersets are similarly specified by "---".
+Supersets are similarly specified by "---". This following says that `joeUser.tvshows` is a subset of the list in the pattern below:
 ```
     {
       "tvshows": [
@@ -153,7 +153,7 @@ If you actually need to match `"..."` or `"---"` in an array see the [customizat
 
 ## Omitted items
 
-Sometimes an important API requirement specifies fields that should not be present. Such as a `password`. This is validated with an explicit `_.isOmitted` check (which is an alias of `_.isUndefined`). Note that it works properly with partial objects.
+Sometimes an important API requirement specifies fields that should not be present, such as a `password`. This can be validated with an explicit `_.isOmitted` check (an alias of `_.isUndefined`). Note that it works properly with partial objects.
 ```
     {
       "id": 43,
@@ -197,11 +197,11 @@ Often database rows are returned with no guaranteed order, this is problematic f
 
 ## Transforms
 
-Hopefully you will only need complex transform functions occasionally because they reduce the clarity of test patterns. However they are nevertheless useful and ultimately quite powerful.
+Hopefully you will need complex transform functions only occasionally because they reduce the clarity of test patterns. However they are nevertheless useful and ultimately quite powerful.
 
 Transforms such as `_.sortBy:email` above are inserted as a sole key value that wraps the target pattern. It's a little unintuitive but the transform functions are applied to the values under test, not to the pattern.
 
-Just to illustrate another transform function, another approach the checking the contents of the friends list is to use the `_.map` function to pull the "email" values, then compare the result with the ellipsis to indicate and unsorted array check.
+Just to illustrate another transform function, a different approach for checking the contents of the friends list is to use the `_.map` function to pull the "email" values, then compare the result with the ellipsis to indicate and unsorted array check.
 
 ```
     {
@@ -260,7 +260,7 @@ In this example `_.arrayOfDups:2` creates two copies of the "tvshows" array. The
 
 ## Customization
 
-In many cases application of transforms will create unintuitive and hard to understand pattern specifications. Fortunately creating custom matchers and custom transforms is easily accomplished via lodash mixins. For our examples we've added two lodash mixins to our example code:
+In many cases application of transforms will create unintuitive and hard to understand pattern specifications. Fortunately creating custom matchers and custom transforms is easily accomplished via lodash mixins. For our examples we've added two lodash mixins in our example code:
 ```
 var _ = require('lodash-checkit');
 _.mixin({
