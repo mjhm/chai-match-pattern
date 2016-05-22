@@ -94,7 +94,7 @@ Feature: Basic chai-match-pattern
     """
     {
       "id": 43,
-      "password": "_.isUndefined",
+      "password": "_.isOmitted",
       "...": ""
     }
     """
@@ -194,7 +194,7 @@ Scenario: Unsorted array variation with "_.map" transform
       {
         "tvshows": {
           "_.arrayOfDups:2": [
-            {"_.size": 3},
+            "_.isSize:3",
             "_.isContainerFor:Sopranos"
           ]
         },

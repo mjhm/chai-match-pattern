@@ -14,7 +14,7 @@ var chai = require('chai');
 var chaiMatchPattern = require('chai-match-pattern');
 chai.use(chaiMatchPattern);
 ```
-Use pass the pattern to check your JSON against with the `.matchPattern(pattern)` assertion function.  For example
+Then use patterns to check your JSON against with the `.matchPattern(pattern)` assertion function.  For example
 ```
 chai.expect({a: 1, b: 'abc'}).to.matchPattern({a: 1, b: '_.isString'});
 ```
@@ -23,12 +23,12 @@ Additionally any of the included `isXxxx` functions can be used directly as asse
 chai.expect(7.5).isBetween(7, 8);
 ```
 
-Here are the main features. You probably won't need all of them, but there's enough flexibility the building blocks will allow you to address the details of your specific us cases. All of the examples below are illustrated in the `/examples/example1/features/` as cucumber-js tests.
+Here are the main features. You probably won't need all of them, but there's plenty of flexibility to allow you to adapt to the details of your specific use cases. All of the examples below are illustrated in the `examples/example1/features/basic.feature` as cucumber-js tests.
 
 1. [Deep JSON matching](#deep-json-matching)
 1. [Matching property types](#matching-property-types)
 1. [Partial objects](#partial-objects)
-1. [Partial and superset matches of arrays](#partial-arrays-and-superset-matches-of-arrays)
+1. [Partial and superset matches of arrays](#partial-and-superset-matches-of-arrays)
 1. [Omitted items](#omitted-items)
 1. [Parameterized matchers](#parameterized-matchers)
 1. [Unsorted arrays](#unsorted-arrays)
@@ -38,9 +38,10 @@ Here are the main features. You probably won't need all of them, but there's eno
 
 ## Deep JSON matching
 
-Just for starters, suppose we have the "joeUser" object below and clone it for the pattern to match: `joeUserClone = _.cloneDeep(joeUser)`. Then `expect(joeUser).to.matchPattern(joeUserClone)` will do a deep match of the objects and succeed as expected.
+Just for starters, suppose we have a "joeUser" object and want to validate its exact contents.  Then `.matchPattern` will do a deep match of the object and succeed as expected.
 ```
-    var joeUserClone = {
+    expect(joeUser).to.matchPattern(
+    {
       "id": 43,
       "email": "joe@matchapattern.org",
       "website": "http://matchapattern.org",
@@ -61,9 +62,9 @@ Just for starters, suppose we have the "joeUser" object below and clone it for t
         {"id": 89, "email": "jerry@matchpattern.org", "active": false},
         {"id": 14, "email": "dan@matchpattern.org", "active": true}
       ]
-    }
+    });
 ```
-Unfortunately, deep matching of exact JSON patterns creates over-specified and brittle feature tests. In practice such deep matches are only useful in small isolated feature tests and some unit tests. Just for example, trying to match the exact `createDate` of the above user from a database might require some complex mocking of the database to spoof a testable exact value. But the good news is we don't really care about the exact date -- all we really care about is that the date behaves like a date. To this end the `chai-match-pattern` enables rich and extensible type checking facilities.
+Unfortunately, deep matching of exact JSON patterns creates over-specified and brittle feature tests. In practice such deep matches are only useful in small isolated feature tests and occasional unit tests. Just for example, trying to match the exact `createDate` of the above user from a database might require some complex mocking of the database to spoof a testable exact value. But the good news is we don't really care about the exact date, we can trust that the database generated it correctly. All we really care about is that the date looks like a date. To this end the `chai-match-pattern` enables a rich and extensible facility for data type checking.
 
 ## Matching property types
 
@@ -91,8 +92,8 @@ The available matching functions are
 1. All `isXxxx` functions from `lodash`.
 1. All validation functions from `checkit` with `is` prepended.
 1. Case convention matchers constructed from lodash's `...Case` functions.
-1. `isDateString`
-1. Any `isXxxx` function you insert as a lodash mixin (see below).
+1. `isDateString`, `isSize`, `isOmitted`
+1. Any `isXxxx` function you insert as a lodash mixin through [customization](#customization).
 
 To see the full list run this:
 ```
@@ -152,11 +153,11 @@ If you need to match `"..."` or `"---"` in an array see the [customization](#cus
 
 ## Omitted items
 
-Sometimes an important API requirement specifies fields that should not be present. Such as a `password`. This is validated with an explicit `_.isUndefined` check. Note that it also works with partial objects.
+Sometimes an important API requirement specifies fields that should not be present. Such as a `password`. This is validated with an explicit `_.isOmitted` check (which is an alias of `_.isUndefined`). Note that it works properly with partial objects.
 ```
     {
       "id": 43,
-      "password": "_.isUndefined",
+      "password": "_.isOmitted",
       "...": ""
     }
 ```
@@ -196,7 +197,7 @@ Often database rows are returned with no guaranteed order, this is problematic f
 
 ## Transforms
 
-Hopefully you will only need complex transform functions occasionally because they reduce the clarity of test patterns. However they are nevertheless occasionally useful and ultimately quite powerful.
+Hopefully you will only need complex transform functions occasionally because they reduce the clarity of test patterns. However they are nevertheless useful and ultimately quite powerful.
 
 Transforms such as `_.sortBy:email` above are inserted as a sole key value that wraps the target pattern. It's a little unintuitive but the transform functions are applied to the values under test, not to the pattern.
 
@@ -216,7 +217,7 @@ Just to illustrate another transform function, another approach the checking the
     }
 ```
 
-`_.size` is an important transform function which can be used to match the size of an array.
+`_.size` is an simple transform function which can be used to match the size of an array. (Alhough the `_.isSize` matching function is even more convenient.)
 
 ```
     {
@@ -248,18 +249,18 @@ Occasionally it may be most convenient to apply multiple matching assertions in 
     {
       "tvshows": {
         "_.arrayOfDups:2": [
-          {"_.size": 3},
+          "_.isSize:3",
           "_.isContainerFor:Sopranos"
         ]
       },
       "...": ""
     }
 ```
-In this example `_.arrayOfDups:2` creates two copies of the "tvshows" array. It applies the transform `_.size` to the first array and matches the result against "3".  The second copy of the array is checked directly by `_.isContainerFor:Sopranos`.
+In this example `_.arrayOfDups:2` creates two copies of the "tvshows" array. The first copy is matched against `_.isSize:3` and the second copy is checked against by `_.isContainerFor:Sopranos`.
 
 ## Customization
 
-In many cases application of transforms will create unintuitive and hard to understand pattern specifications. Fortunately creating custom matchers and custom transforms is as easily accomplished via lodash mixins. For our examples we've added two lodash mixins:
+In many cases application of transforms will create unintuitive and hard to understand pattern specifications. Fortunately creating custom matchers and custom transforms is easily accomplished via lodash mixins. For our examples we've added two lodash mixins:
 ```
 var _ = require('lodash-checkit');
 _.mixin({
