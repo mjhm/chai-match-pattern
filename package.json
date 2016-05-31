@@ -6,12 +6,21 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha"
   },
-  "repository": "https://github.com/mjhm/chai-match-pattern",
+  "repository": "https://github.com/originate/chai-match-pattern",
+  "bugs": {
+    "url": "https://github.com/originate/chai-match-pattern/issues"
+  },
+  "homepage": "https://github.com/originate/chai-match-pattern#readme",
   "keywords": [
     "chai",
     "chai-plugin",
     "lodash",
-    "checkit"
+    "checkit",
+    "JSON",
+    "matching",
+    "deep",
+    "cucumber",
+    "mocha"
   ],
   "author": "John McLaughlin",
   "license": "MIT",
@@ -22,6 +31,6 @@
     "rewire": "^2.5.1"
   },
   "dependencies": {
-    "lodash-match-pattern": "git://github.com/mjhm/lodash-match-pattern.git"
+    "lodash-match-pattern": "^0.1.0"
   }
 }

@@ -40,5 +40,6 @@ var chaiMatchPattern = (_chai, utils) => {
 };
 
 chaiMatchPattern.use = matchPattern.use.bind(matchPattern)
+chaiMatchPattern.getLodashModule = matchPattern.getLodashModule.bind(matchPattern)
 
 module.exports = chaiMatchPattern

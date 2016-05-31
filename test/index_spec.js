@@ -16,13 +16,13 @@ describe('chai-match-pattern', function () {
 
     it('matches {a: 2, b: 2} with pattern {a: 2, b: "_.isBetween:1:3"}', function () {
       var testObj = {a: 2, b: 2};
-      var pattern = {a: 2, b: "_.isBetween:1:3"}
+      var pattern = {a: 2, b: '_.isBetween:1:3'}
       expect(testObj).to.matchPattern(pattern);
     });
 
     it('does not match {a: 2, b: 2} with pattern {a: 2, b: "_.isBetween:2:3"}', function () {
       var testObj = {a: 2, b: 2};
-      var pattern = {a: 2, b: "_.isBetween:2:3"}
+      var pattern = {a: 2, b: '_.isBetween:2:3'}
       expect(testObj).not.to.matchPattern(pattern);
     });
   });
