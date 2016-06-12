@@ -2,8 +2,8 @@
 
 var matchPattern = require('lodash-match-pattern');
 
-var chaiMatchPattern = (_chai, utils) => {
-  let Assertion = _chai.Assertion;
+var chaiMatchPattern = function (_chai, utils) {
+  var Assertion = _chai.Assertion;
 
   function assertMatchPattern(pattern) {
     var obj = this._obj;
