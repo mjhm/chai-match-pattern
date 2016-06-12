@@ -3,9 +3,9 @@
 
 var chai = require('chai');
 var expect = chai.expect;
-var _ = require('lodash-checkit');
 var chaiMatchPattern = require('../');
 chai.use(chaiMatchPattern);
+var _ = chaiMatchPattern.getLodashModule();
 
 describe('chai-match-pattern', function () {
   describe('basic pattern match', function () {
@@ -14,15 +14,15 @@ describe('chai-match-pattern', function () {
       expect(testObj).to.matchPattern(testObj);
     });
 
-    it('matches {a: 2, b: 2} with pattern {a: 2, b: "_.isBetween:1:3"}', function () {
+    it('matches {a: 2, b: 2} with pattern {a: 2, b: "_.isBetween|1|3"}', function () {
       var testObj = {a: 2, b: 2};
-      var pattern = {a: 2, b: '_.isBetween:1:3'}
+      var pattern = {a: 2, b: '_.isBetween|1|3'}
       expect(testObj).to.matchPattern(pattern);
     });
 
-    it('does not match {a: 2, b: 2} with pattern {a: 2, b: "_.isBetween:2:3"}', function () {
+    it('does not match {a: 2, b: 2} with pattern {a: 2, b: "_.isBetween|2|3"}', function () {
       var testObj = {a: 2, b: 2};
-      var pattern = {a: 2, b: '_.isBetween:2:3'}
+      var pattern = {a: 2, b: '_.isBetween|2|3'}
       expect(testObj).not.to.matchPattern(pattern);
     });
   });

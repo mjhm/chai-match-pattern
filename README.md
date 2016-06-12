@@ -1,4 +1,11 @@
 # chai-match-pattern
+[![NPM Version](https://img.shields.io/npm/v/chai-match-pattern.svg)](https://www.npmjs.com/package/chai-match-pattern)
+![CircleCI](https://circleci.com/gh/Originate/chai-match-pattern.svg?style=shield&circle-token=:circle-token)
+[![David Dependencies](https://david-dm.org/Originate/chai-match-pattern.svg)](https://david-dm.org/Originate/chai-match-pattern)
+
+Related Modules:
+[![lodash-match-pattern](https://img.shields.io/npm/v/lodash-match-pattern.svg?label=lodash-match-pattern)](https://www.npmjs.com/package/lodash-match-pattern)
+[![lodash-checkit](https://img.shields.io/npm/v/lodash-checkit.svg?label=lodash-checkit)](https://www.npmjs.com/package/lodash-checkit)
 
 This is a Chai plugin for general purpose JavaScript Object pattern matching. It wraps the [`lodash-match-pattern`](https://github.com/originate/lodash-match-pattern) module -- which is built on the [`lodash-checkit`](https://github.com/Originate/lodash-checkit) module,  which itself is a [`lodash`](https://lodash.com/docs) extension which adds validation functionality from the popular [`checkit`](https://github.com/tgriesser/checkit) module.
 
