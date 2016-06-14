@@ -17,17 +17,22 @@ SEE [`lodash-match-pattern`](https://github.com/originate/lodash-match-pattern) 
 npm install chai-match-pattern --save-dev
 ```
 In your test file insert
+
 ```javascript
 var chai = require('chai');
 var chaiMatchPattern = require('chai-match-pattern');
 chai.use(chaiMatchPattern);
 var _ = chaiMatchPattern.getLodashModule(); // recommend using our lodash extension
 ```
+
 Then use patterns to check your JSON with the `.matchPattern(pattern)` assertion function.  For example
+
 ```javascript
 chai.expect({a: 1, b: 'abc'}).to.matchPattern({a: 1, b: _.isString});
 ```
+
 Additionally any of the included `isXxxx` functions can be used directly as assertion functions. For example
+
 ```javascript
 chai.expect(7.5).isBetween(7, 8);
 ```
