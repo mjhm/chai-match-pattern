@@ -1,6 +1,6 @@
 {
   "name": "chai-match-pattern",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Validates a deep structured JSON pattern",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,6 @@
     "mocha": "^2.3.4"
   },
   "dependencies": {
-    "lodash-match-pattern": "^0.1.7"
+    "lodash-match-pattern": "^0.2.0"
   }
 }
