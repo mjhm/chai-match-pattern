@@ -30,6 +30,6 @@
     "mocha": "^2.3.4"
   },
   "dependencies": {
-    "lodash-match-pattern": "^0.1.7"
+    "lodash-match-pattern": "^0.2.0"
   }
 }
