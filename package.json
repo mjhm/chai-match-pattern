@@ -26,10 +26,10 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.4.1",
-    "dependency-lint": "^4.0.1",
-    "mocha": "^2.3.4"
+    "dependency-lint": "^4.1.3",
+    "mocha": "^3.0.2"
   },
   "dependencies": {
-    "lodash-match-pattern": "^0.2.0"
+    "lodash-match-pattern": "^1.1.0"
   }
 }
