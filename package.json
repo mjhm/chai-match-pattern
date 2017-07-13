@@ -1,5 +1,8 @@
 {
   "name": "chai-match-pattern",
+  "engines": {
+    "node": ">=4"
+  },
   "version": "1.1.0",
   "description": "Validates a deep structured JSON pattern",
   "main": "index.js",
