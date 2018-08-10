@@ -25,6 +25,7 @@ Related Modules:
 # with npm
 npm install chai-match-pattern --save-dev
 # or with yarn
+yarn add --dev chai-match-pattern
 ```
 
 
