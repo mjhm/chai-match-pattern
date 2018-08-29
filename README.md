@@ -22,15 +22,20 @@ Related Modules:
 
 #### Basic Usage
 ```
+# with npm
 npm install chai-match-pattern --save-dev
+# or with yarn
+yarn add --dev chai-match-pattern
 ```
+
+
 In your test file insert
 
 ```javascript
-var chai = require('chai');
-var chaiMatchPattern = require('chai-match-pattern');
+const chai = require('chai');
+const chaiMatchPattern = require('chai-match-pattern');
 chai.use(chaiMatchPattern);
-var _ = chaiMatchPattern.getLodashModule(); // recommend using our lodash extension
+const _ = chaiMatchPattern.getLodashModule(); // recommend using our lodash extension
 ```
 
 Then use patterns to check your JSON with the `.matchPattern(pattern)` assertion function.  For example
