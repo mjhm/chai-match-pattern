@@ -3,7 +3,7 @@
   "engines": {
     "node": ">=4"
   },
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Validates a deep structured JSON pattern",
   "main": "index.js",
   "scripts": {
