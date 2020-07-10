@@ -1,7 +1,6 @@
 # chai-match-pattern
 [![NPM](https://nodei.co/npm/chai-match-pattern.png?downloads=true)](https://www.npmjs.com/package/chai-match-pattern)
 
-![CircleCI](https://circleci.com/gh/Originate/chai-match-pattern.svg?style=shield&circle-token=:circle-token)
 [![David Dependencies](https://david-dm.org/Originate/chai-match-pattern.svg)](https://david-dm.org/Originate/chai-match-pattern)
 
 Related Modules:

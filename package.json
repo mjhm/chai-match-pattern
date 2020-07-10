@@ -30,9 +30,9 @@
   "devDependencies": {
     "chai": "^4.1.0",
     "dependency-lint": "^5.0.1",
-    "mocha": "^3.4.2"
+    "mocha": "^8.0.1"
   },
   "dependencies": {
-    "lodash-match-pattern": "^2.0.1"
+    "lodash-match-pattern": "^2.2.1"
   }
 }
