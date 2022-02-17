@@ -1,7 +1,7 @@
 {
   "name": "chai-match-pattern",
   "engines": {
-    "node": ">=4"
+    "node": ">=12"
   },
   "version": "1.2.0",
   "description": "Validates a deep structured JSON pattern",
@@ -9,11 +9,11 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha"
   },
-  "repository": "https://github.com/originate/chai-match-pattern",
+  "repository": "https://github.com/mjhm/chai-match-pattern",
   "bugs": {
-    "url": "https://github.com/originate/chai-match-pattern/issues"
+    "url": "https://github.com/mjhm/chai-match-pattern/issues"
   },
-  "homepage": "https://github.com/originate/chai-match-pattern#readme",
+  "homepage": "https://github.com/mjhm/chai-match-pattern#readme",
   "keywords": [
     "chai",
     "chai-plugin",
@@ -28,11 +28,10 @@
   "author": "John McLaughlin",
   "license": "MIT",
   "devDependencies": {
-    "chai": "^4.1.0",
-    "dependency-lint": "^5.0.1",
-    "mocha": "^8.0.1"
+    "chai": "^4.3.6",
+    "mocha": "^9.2.0"
   },
   "dependencies": {
-    "lodash-match-pattern": "^2.2.1"
+    "lodash-match-pattern": "^2.3.1"
   }
 }
