@@ -1,8 +1,6 @@
 # chai-match-pattern
 [![NPM](https://nodei.co/npm/chai-match-pattern.png?downloads=true)](https://www.npmjs.com/package/chai-match-pattern)
 
-[![David Dependencies](https://david-dm.org/Originate/chai-match-pattern.svg)](https://david-dm.org/Originate/chai-match-pattern)
-
 Related Modules:
 [![lodash-match-pattern](https://img.shields.io/npm/v/lodash-match-pattern.svg?label=lodash-match-pattern)](https://www.npmjs.com/package/lodash-match-pattern)
 [![lodash-checkit](https://img.shields.io/npm/v/lodash-checkit.svg?label=lodash-checkit)](https://www.npmjs.com/package/lodash-checkit)
